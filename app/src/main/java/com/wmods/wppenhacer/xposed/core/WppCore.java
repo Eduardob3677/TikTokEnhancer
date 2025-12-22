@@ -603,7 +603,7 @@ public class WppCore {
             WppCore.getCurrentActivity().runOnUiThread(() -> {
                 var dialog = new AlertDialogWpp(WppCore.getCurrentActivity());
                 dialog.setTitle("Bridge Error");
-                dialog.setMessage("The Connection with WaEnhancer was lost, it is necessary to reconnect with WaEnhancer in order to reestablish the connection.");
+                dialog.setMessage("The Connection with TikTokEnhancer was lost, it is necessary to reconnect with TikTokEnhancer in order to reestablish the connection.");
                 dialog.setPositiveButton("reconnect", (dialog1, which) -> {
                     client.tryReconnect();
                     dialog.dismiss();

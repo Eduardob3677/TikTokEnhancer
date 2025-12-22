@@ -163,7 +163,7 @@ public class ThemePreference extends Preference implements FilePicker.OnUriPicke
     }
 
     private void createNewFolder(String folderName) {
-        File rootDirectory = new File(Environment.getExternalStorageDirectory(), "Download/WaEnhancer/themes");
+        File rootDirectory = new File(Environment.getExternalStorageDirectory(), "Download/TikTokEnhancer/themes");
         File newFolder = new File(rootDirectory, folderName);
         if (!newFolder.exists()) {
             if (newFolder.mkdirs()) {
@@ -186,7 +186,7 @@ public class ThemePreference extends Preference implements FilePicker.OnUriPicke
                 while ((zipEntry = zipInputStream.getNextEntry()) != null) {
                     var entryName = zipEntry.getName();
                     var folderName = entryName.substring(0, entryName.lastIndexOf('/'));
-                    var rootDirectory = new File(Environment.getExternalStorageDirectory(), "Download/WaEnhancer/themes");
+                    var rootDirectory = new File(Environment.getExternalStorageDirectory(), "Download/TikTokEnhancer/themes");
                     var newFolder = new File(rootDirectory, folderName);
                     if (!newFolder.exists()) {
                         newFolder.mkdirs();

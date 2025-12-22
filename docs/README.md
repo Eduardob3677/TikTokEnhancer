@@ -1,10 +1,10 @@
 | **English** | [Português(Brasil)](README.pt-BR.md)
 
-# WaEnhancer
+# TikTokEnhancer
 <div align="center">
-  <p><strong>WaEnhancer is an Xposed module that enhances your WhatsApp experience.</p></strong>
+  <p><strong>TikTokEnhancer is an Xposed module that enhances your WhatsApp experience.</p></strong>
   <p><strong>Warning:</strong> This module is intended for educational purposes only, you may have problems with your WhatsApp account, risk of banning! Use it at your own risk.</p>
-  <p>Please note that this project is currently in development, so bugs and crashes may occur. If you encounter any issues report them in our group or create an <a href="https://github.com/Dev4Mod/WaEnhancer/issues">issue</a> here.</p>
+  <p>Please note that this project is currently in development, so bugs and crashes may occur. If you encounter any issues report them in our group or create an <a href="https://github.com/Dev4Mod/TikTokEnhancer/issues">issue</a> here.</p>
 </div>
 
 
@@ -139,12 +139,12 @@
 1. Ensure that your device is rooted.
 2. Install the Xposed Framework (recommend [this](https://github.com/JingMatrix/LSPosed) LPosed) on
    your device.
-3. Download the WaEnhancer from the [Actions](https://github.com/Dev4Mod/WaEnhancer/actions) section.
-4. Install the WaEnhancer APK.
-5. Enable the WaEnhancer module in the Xposed Installer app.
+3. Download the TikTokEnhancer from the [Actions](https://github.com/Dev4Mod/TikTokEnhancer/actions) section.
+4. Install the TikTokEnhancer APK.
+5. Enable the TikTokEnhancer module in the Xposed Installer app.
 
 ## Support
-If you encounter any issues or have questions about WaEnhancer, please [Visit Telegram](https://t.me/waenhancer).
+If you encounter any issues or have questions about TikTokEnhancer, please [Visit Telegram](https://t.me/waenhancer).
 
 ## License
 This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
@@ -157,4 +157,4 @@ This project is licensed under the GNU License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Note**: Please use WaEnhancer responsibly and in compliance with the terms and conditions of the apps you are modifying. Misuse of this tool may lead to legal consequences.
+**Note**: Please use TikTokEnhancer responsibly and in compliance with the terms and conditions of the apps you are modifying. Misuse of this tool may lead to legal consequences.
