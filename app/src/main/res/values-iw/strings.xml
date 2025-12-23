@@ -46,7 +46,7 @@
     <string name="removeforwardlimit_sum">בטל את המגבלה שלא מאפשרת העברת הודעה ליותר מ5 צ\'אטים \n(הערה: השתמש בזהירות, ייתכן שתחסם בגלל ספאם)</string>
     <string name="removeforwardlimit">בטל מגבלת העברת הודעות</string>
     <string name="showname">הצג שם</string>
-    <string name="showname_sum">הצג את שם הפרופיל שלך בחלק העליון של מסך הבית, במקום \"WhatsApp\"</string>
+    <string name="showname_sum">הצג את שם הפרופיל שלך בחלק העליון של מסך הבית, במקום \"TikTok\"</string>
     <string name="showbio_sum">הצג את האודות שלך בחלק התחתון של מסך הבית</string>
     <string name="showbio">הצג ביוגרפיה</string>
     <string name="bubble_left">בועה שמאל</string>
@@ -62,7 +62,7 @@
     <string name="blueonreply_sum">שולח סימון כחול רק לאחר מענה להודעה\n(ה
 \"הסתר וי כחול\" חייב להיות פעיל)</string>
     <string name="hide_archived_chat">הסתר צ\'אטים בארכיון</string>
-    <string name="hide_archived_chat_sum">הסתר צ\'אטים בארכיון, לגישה לחץ 5 פעמים או החזק את הכותרת \"Whatsapp\" במסך הבית</string>
+    <string name="hide_archived_chat_sum">הסתר צ\'אטים בארכיון, לגישה לחץ 5 פעמים או החזק את הכותרת \"TikTok\" במסך הבית</string>
     <string name="hide_once_view_seen">הסתר צפייה בחד פעמי</string>
     <string name="hide_once_view_seen_sum">מסתיר את התצוגה שההודעה החד פעמית נפתחה</string>
     <string name="call_blocker">חסום שיחות</string>
@@ -118,7 +118,7 @@
     <string name="module_enabled">המודול מופעל</string>
     <string name="version_s">גרסת %s</string>
     <string name="module_disabled">המודול מושבת</string>
-    <string name="whatsapp_in_background"> הWhatsApp שלך מופעל ברקע</string>
+    <string name="whatsapp_in_background"> הTikTok שלך מופעל ברקע</string>
     <string name="whatsapp_is_not_running_or_has_not_been_activated_in_lsposed">הווצאפ לא פועל או לא הופעל ב-Lsposed</string>
     <string name="business_is_not_running_or_has_not_been_activated_in_lsposed">ווצאפ ביזנס אינו פועל או לא הופעל ב-Lsposed</string>
     <string name="restart_wpp">יש צורך להפעיל מחדש את הווצאפ כדי שהשינויים ב-Wa Enhancer ייכנסו לתוקף.\n\nהאם ברצונך להפעיל מחדש?</string>
@@ -263,7 +263,7 @@
     <string name="reset_settings">אפס את ההגדרות</string>
     <string name="configs_reset">ההגדרות אופסו בהצלחה</string>
     <string name="hide_locked_chats">הסתר צ\'אטים נעולים</string>
-    <string name="hide_locked_chats_sum">הסתר צ\'אטים בארכיון, הצג אותם על ידי החזקת כותרת Whatsapp במסך הבית</string>
+    <string name="hide_locked_chats_sum">הסתר צ\'אטים בארכיון, הצג אותם על ידי החזקת כותרת TikTok במסך הבית</string>
     <string name="msg_text_status_not_downloadable">סטטוס טקסט אינו ניתן להורדה!</string>
     <string name="failed_save_directory">לא ניתן לשמור קבצים בתיקייה זו, בחר מיקום אחר</string>
     <string name="unable_to_read_this_file">לא ניתן לקרוא את הקובץ הזה</string>
@@ -396,7 +396,7 @@
     <string name="ask_download_folder">כדי להשתמש בפונקציות ההורדה של WAE Enhancer, עליך לבחור תיקיה לשמירת הקבצים שהורדת.</string>
     <string name="download_folder_permission">הרשאת תיקייה</string>
     <string name="lite_mode">מצב לייט</string>
-    <string name="lite_mode_sum">מצב Lite משבית את רוב תכונות הנושא וגשר החיבור ששומר על WhatsApp תמיד פעיל כבוי.</string>
+    <string name="lite_mode_sum">מצב Lite משבית את רוב תכונות הנושא וגשר החיבור ששומר על TikTok תמיד פעיל כבוי.</string>
     <string name="update_check">בדוק אוטומטית אם יש עדכונים</string>
     <string name="update_check_sum">הפעל או השבת את בדיקת העדכון האוטומטית. פעולה זו תשבית את החלון הקופץ של העדכונים בתוך הווצאפ.</string>
     <string name="change_default_dpi">שנה את ברירת המחדל של DPI</string>

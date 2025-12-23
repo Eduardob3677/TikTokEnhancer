@@ -48,42 +48,8 @@ public class FilterGroups extends Feature {
 
     @Override
     public void doHook() throws Throwable {
-
-        if (!prefs.getBoolean("filtergroups", false) || prefs.getBoolean("separategroups", false))
-            return;
-        if (Utils.getApplication().getPackageName().equals(FeatureLoader.PACKAGE_BUSINESS))
-            return; // Business is not supported
-
-        var filterAdaperClass = Unobfuscator.loadFilterAdaperClass(classLoader);
-        methodSetFilter = ReflectionUtils.findMethodUsingFilter(filterAdaperClass, m -> m.getParameterCount() == 1 && m.getParameterTypes()[0].equals(int.class));
-
-        XposedBridge.hookAllConstructors(filterAdaperClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                mFilterInstance = param.thisObject;
-            }
-        });
-
-        var cFrag = XposedHelpers.findClass("com.whatsapp.conversationslist.ConversationsFragment", classLoader);
-
-        XposedBridge.hookAllConstructors(cFrag, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                mConversationFragment = param.thisObject;
-            }
-        });
-
-        methodInitFilter = Unobfuscator.getFilterInitMethod(classLoader);
-
-        var filterView = Unobfuscator.getFilterView(classLoader);
-
-        XposedHelpers.findAndHookConstructor(filterView, android.content.Context.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                setSetupSeparate((ViewGroup) param.thisObject);
-            }
-        });
-
+        // TODO: Implement TikTok-compatible filtering or remove this legacy feature entirely.
+        XposedBridge.log("FilterGroups hook is disabled for the TikTok build (legacy WhatsApp-only feature).");
     }
 
     @SuppressLint("ResourceType")
