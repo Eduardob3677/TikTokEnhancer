@@ -89,7 +89,7 @@ public class App extends Application {
 
 
     public void restartApp(String packageWpp) {
-        Intent intent = new Intent(BuildConfig.APPLICATION_ID + ".WHATSAPP.RESTART");
+        Intent intent = new Intent(BuildConfig.APPLICATION_ID + ".TIKTOK.RESTART");
         intent.putExtra("PKG", packageWpp);
         sendBroadcast(intent);
     }
@@ -112,8 +112,7 @@ public class App extends Application {
     }
 
     public static boolean isOriginalPackage() {
-        //noinspection ConstantValue
-        return BuildConfig.APPLICATION_ID.equals("com.wmods.wppenhacer");
+        return BuildConfig.APPLICATION_ID.startsWith("com.wmods.wppenhacer");
     }
 
 }

@@ -58,10 +58,8 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 try {
-                    if (FeatureLoader.PACKAGE_WPP.equals(intent.getStringExtra("PKG")))
+                    if (FeatureLoader.isTargetPackage(intent.getStringExtra("PKG")))
                         receiverBroadcastWpp(context, intent);
-                    else
-                        receiverBroadcastBusiness(context, intent);
                 } catch (Exception ignored) {
                 }
             }
@@ -75,19 +73,17 @@ public class HomeFragment extends BaseFragment {
         checkStateWpp(requireActivity());
 
         binding.rebootBtn.setOnClickListener(view -> {
-            App.getInstance().restartApp(FeatureLoader.PACKAGE_WPP);
+            App.getInstance().restartApp(FeatureLoader.PACKAGE_TIKTOK);
             disableWpp(requireActivity());
-        });
-
-        binding.rebootBtn2.setOnClickListener(view -> {
-            App.getInstance().restartApp(FeatureLoader.PACKAGE_BUSINESS);
-            disableBusiness(requireActivity());
         });
 
         binding.exportBtn.setOnClickListener(view -> saveConfigs(this.getContext()));
         binding.importBtn.setOnClickListener(view -> importConfigs(this.getContext()));
         binding.resetBtn.setOnClickListener(view -> resetConfigs(this.getContext()));
 
+        binding.status3.setVisibility(View.GONE);
+        binding.listBusiness.setVisibility(View.GONE);
+        binding.listTiktokTitle.setText(R.string.list_wpp);
         return binding.getRoot();
     }
 
@@ -98,45 +94,21 @@ public class HomeFragment extends BaseFragment {
     }
 
     @SuppressLint("StringFormatInvalid")
-    private void receiverBroadcastBusiness(Context context, Intent intent) {
-        binding.statusTitle3.setText(R.string.business_in_background);
-        var version = intent.getStringExtra("VERSION");
-        var supported_list = Arrays.asList(context.getResources().getStringArray(R.array.supported_versions_business));
-        if (version != null && supported_list.stream().anyMatch(s -> version.startsWith(s.replace(".xx", "")))) {
-            binding.statusSummary3.setText(getString(R.string.version_s, version));
-            binding.status3.setCardBackgroundColor(context.getColor(R.color.material_state_green));
-        } else {
-            binding.statusSummary3.setText(getString(R.string.version_s_not_listed, version));
-            binding.status3.setCardBackgroundColor(context.getColor(R.color.material_state_yellow));
-        }
-        binding.rebootBtn2.setVisibility(View.VISIBLE);
-        binding.statusSummary3.setVisibility(View.VISIBLE);
-        binding.statusIcon3.setImageResource(R.drawable.ic_round_check_circle_24);
-    }
-
-    @SuppressLint("StringFormatInvalid")
     private void receiverBroadcastWpp(Context context, Intent intent) {
         binding.statusTitle2.setText(R.string.whatsapp_in_background);
         var version = intent.getStringExtra("VERSION");
-        var supported_list = Arrays.asList(context.getResources().getStringArray(R.array.supported_versions_wpp));
-
-        if (version != null && supported_list.stream().anyMatch(s -> version.startsWith(s.replace(".xx", "")))) {
-            binding.statusSummary1.setText(getString(R.string.version_s, version));
-            binding.status2.setCardBackgroundColor(context.getColor(R.color.material_state_green));
-        } else {
-            binding.statusSummary1.setText(getString(R.string.version_s_not_listed, version));
-            binding.status2.setCardBackgroundColor(context.getColor(R.color.material_state_yellow));
-        }
+        binding.statusSummary1.setText(getString(R.string.version_s, version));
+        binding.status2.setCardBackgroundColor(context.getColor(R.color.material_state_green));
         binding.rebootBtn.setVisibility(View.VISIBLE);
         binding.statusSummary1.setVisibility(View.VISIBLE);
         binding.statusIcon2.setImageResource(R.drawable.ic_round_check_circle_24);
+        binding.listTiktok.setText(version != null ? version : getString(R.string.tiktok_version_unknown));
     }
 
     private void resetConfigs(Context context) {
         var prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.getAll().forEach((key, value) -> prefs.edit().remove(key).apply());
-        App.getInstance().restartApp(FeatureLoader.PACKAGE_WPP);
-        App.getInstance().restartApp(FeatureLoader.PACKAGE_BUSINESS);
+        App.getInstance().restartApp(FeatureLoader.PACKAGE_TIKTOK);
         Utils.showToast(context.getString(R.string.configs_reset), Toast.LENGTH_SHORT);
     }
 
@@ -215,8 +187,7 @@ public class HomeFragment extends BaseFragment {
                     }
                 }
                 Toast.makeText(context, context.getString(R.string.configs_imported), Toast.LENGTH_SHORT).show();
-                App.getInstance().restartApp(FeatureLoader.PACKAGE_WPP);
-                App.getInstance().restartApp(FeatureLoader.PACKAGE_BUSINESS);
+                App.getInstance().restartApp(FeatureLoader.PACKAGE_TIKTOK);
             } catch (Exception e) {
                 Log.e("importConfigs", e.getMessage(), e);
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -239,28 +210,17 @@ public class HomeFragment extends BaseFragment {
             binding.status.setCardBackgroundColor(activity.getColor(R.color.material_state_red));
             binding.statusSummary.setVisibility(View.GONE);
         }
-        if (isInstalled(FeatureLoader.PACKAGE_WPP) && App.isOriginalPackage()) {
+        if (isInstalled(FeatureLoader.PACKAGE_TIKTOK) && App.isOriginalPackage()) {
             disableWpp(activity);
         } else {
             binding.status2.setVisibility(View.GONE);
         }
 
-        if (isInstalled(FeatureLoader.PACKAGE_BUSINESS)) {
-            disableBusiness(activity);
-        } else {
-            binding.status3.setVisibility(View.GONE);
-        }
         checkWpp(activity);
         binding.deviceName.setText(Build.MANUFACTURER);
         binding.sdk.setText(String.valueOf(Build.VERSION.SDK_INT));
         binding.modelName.setText(Build.DEVICE);
-        if (App.isOriginalPackage()) {
-            binding.listWpp.setText(Arrays.toString(activity.getResources().getStringArray(R.array.supported_versions_wpp)));
-        } else {
-            binding.listWppTitle.setVisibility(View.GONE);
-            binding.listWpp.setVisibility(View.GONE);
-        }
-        binding.listBusiness.setText(Arrays.toString(activity.getResources().getStringArray(R.array.supported_versions_business)));
+        binding.listTiktok.setText(getString(R.string.tiktok_version_pending));
     }
 
     private boolean isInstalled(String packageWpp) {
@@ -270,14 +230,6 @@ public class HomeFragment extends BaseFragment {
         } catch (Exception ignored) {
         }
         return false;
-    }
-
-    private void disableBusiness(FragmentActivity activity) {
-        binding.statusIcon3.setImageResource(R.drawable.ic_round_error_outline_24);
-        binding.statusTitle3.setText(R.string.business_is_not_running_or_has_not_been_activated_in_lsposed);
-        binding.status3.setCardBackgroundColor(activity.getColor(R.color.material_state_red));
-        binding.statusSummary3.setVisibility(View.GONE);
-        binding.rebootBtn2.setVisibility(View.GONE);
     }
 
     private void disableWpp(FragmentActivity activity) {

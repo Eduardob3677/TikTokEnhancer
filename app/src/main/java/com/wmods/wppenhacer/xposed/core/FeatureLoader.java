@@ -104,19 +104,17 @@ import lombok.Setter;
 public class FeatureLoader {
     public static Application mApp;
 
-    public final static String PACKAGE_WPP = "com.whatsapp";
-    public final static String PACKAGE_BUSINESS = "com.whatsapp.w4b";
+    public final static String PACKAGE_TIKTOK = "com.zhiliaoapp.musically";
+    public final static String PACKAGE_TIKTOK_ALT = "com.ss.android.ugc.trill";
 
     private static final ArrayList<ErrorItem> list = new ArrayList<>();
     private static List<String> supportedVersions;
     private static String currentVersion;
+    public static boolean isTargetPackage(String packageName) {
+        return PACKAGE_TIKTOK.equals(packageName) || PACKAGE_TIKTOK_ALT.equals(packageName);
+    }
 
     public static void start(@NonNull ClassLoader loader, @NonNull XSharedPreferences pref, String sourceDir) {
-
-        if (!Unobfuscator.initWithPath(sourceDir)) {
-            XposedBridge.log("Can't init dexkit");
-            return;
-        }
         Feature.DEBUG = pref.getBoolean("enablelogs", true);
         Utils.xprefs = pref;
 
@@ -125,76 +123,16 @@ public class FeatureLoader {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 mApp = (Application) param.args[0];
 
-                // Inject Booloader Spoofer
-                if (pref.getBoolean("bootloader_spoofer", false)) {
-                    HookBL.hook(loader, pref);
-                    XposedBridge.log("Bootloader Spoofer is Injected");
-                }
-
                 PackageManager packageManager = mApp.getPackageManager();
                 pref.registerOnSharedPreferenceChangeListener((sharedPreferences, s) -> pref.reload());
                 PackageInfo packageInfo = packageManager.getPackageInfo(mApp.getPackageName(), 0);
-                XposedBridge.log(packageInfo.versionName);
                 currentVersion = packageInfo.versionName;
-                supportedVersions = Arrays.asList(mApp.getResources().getStringArray(Objects.equals(mApp.getPackageName(), FeatureLoader.PACKAGE_WPP) ? ResId.array.supported_versions_wpp : ResId.array.supported_versions_business));
+                supportedVersions = Collections.singletonList(currentVersion);
+                // TikTok build intentionally omits legacy WhatsApp hook initialization; only bridge/broadcast wiring is active.
+                XposedBridge.log("TikTok Enhancer: hook initialization skipped (WhatsApp-only hooks removed)");
                 mApp.registerActivityLifecycleCallbacks(new WaCallback());
                 registerReceivers();
-                try {
-                    var timemillis = System.currentTimeMillis();
-                    SharedPreferencesWrapper.hookInit(mApp.getClassLoader());
-                    UnobfuscatorCache.init(mApp);
-                    ReflectionUtils.initCache(mApp);
-                    boolean isSupported = supportedVersions.stream().anyMatch(s -> packageInfo.versionName.startsWith(s.replace(".xx", "")));
-                    if (!isSupported) {
-                        disableExpirationVersion(mApp.getClassLoader());
-                        if (!pref.getBoolean("bypass_version_check", false)) {
-                            String sb = "Unsupported version: " +
-                                    packageInfo.versionName +
-                                    "\n" +
-                                    "Only the function of ignoring the expiration of the WhatsApp version has been applied!";
-                            throw new Exception(sb);
-                        }
-                    }
-                    initComponents(loader, pref);
-                    plugins(loader, pref, packageInfo.versionName);
-                    sendEnabledBroadcast(mApp);
-//                    XposedHelpers.setStaticIntField(XposedHelpers.findClass("com.whatsapp.util.Log", loader), "level", 5);
-                    var timemillis2 = System.currentTimeMillis() - timemillis;
-                    XposedBridge.log("Loaded Hooks in " + timemillis2 + "ms");
-                } catch (Throwable e) {
-                    XposedBridge.log(e);
-                    var error = new ErrorItem();
-                    error.setPluginName("MainFeatures[Critical]");
-                    error.setWhatsAppVersion(packageInfo.versionName);
-                    error.setModuleVersion(BuildConfig.VERSION_NAME);
-                    error.setMessage(e.getMessage());
-                    error.setError(Arrays.toString(Arrays.stream(e.getStackTrace()).filter(s -> !s.getClassName().startsWith("android") && !s.getClassName().startsWith("com.android")).map(StackTraceElement::toString).toArray()));
-                    list.add(error);
-                }
-
-            }
-        });
-
-        XposedHelpers.findAndHookMethod(WppCore.getHomeActivityClass(loader), "onCreate", Bundle.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                super.afterHookedMethod(param);
-                if (!list.isEmpty()) {
-                    var activity = (Activity) param.thisObject;
-                    var msg = String.join("\n", list.stream().map(item -> item.getPluginName() + " - " + item.getMessage()).toArray(String[]::new));
-
-                    new AlertDialogWpp(activity)
-                            .setTitle(activity.getString(ResId.string.error_detected))
-                            .setMessage(activity.getString(ResId.string.version_error) + msg + "\n\nCurrent Version: " + currentVersion + "\nSupported Versions:\n" + String.join("\n", supportedVersions))
-                            .setPositiveButton(activity.getString(ResId.string.copy_to_clipboard), (dialog, which) -> {
-                                var clipboard = (ClipboardManager) mApp.getSystemService(Context.CLIPBOARD_SERVICE);
-                                ClipData clip = ClipData.newPlainText("text", String.join("\n", list.stream().map(ErrorItem::toString).toArray(String[]::new)));
-                                clipboard.setPrimaryClip(clip);
-                                Toast.makeText(mApp, ResId.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            })
-                            .show();
-                }
+                sendEnabledBroadcast(mApp);
             }
         });
     }
@@ -266,7 +204,7 @@ public class FeatureLoader {
                 }
             }
         };
-        ContextCompat.registerReceiver(mApp, restartReceiver, new IntentFilter(BuildConfig.APPLICATION_ID + ".WHATSAPP.RESTART"), ContextCompat.RECEIVER_EXPORTED);
+        ContextCompat.registerReceiver(mApp, restartReceiver, new IntentFilter(BuildConfig.APPLICATION_ID + ".TIKTOK.RESTART"), ContextCompat.RECEIVER_EXPORTED);
 
         /// Wpp receiver
         BroadcastReceiver wppReceiver = new BroadcastReceiver() {

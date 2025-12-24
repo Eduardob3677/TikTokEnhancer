@@ -62,7 +62,7 @@
     <string name="blueonreply">أرسل علامة زرقاء عند الرد</string>
     <string name="blueonreply_sum">إرسال علامات الصح الزرقاء بعد الرد على رسالة(ملاحظة: يجب أن يكون خِيار \"إخفاء العلامات الزرقاء\" نشطًا)</string>
     <string name="hide_archived_chat">إخفاء المحادثة المؤرشفة</string>
-    <string name="hide_archived_chat_sum">إخفاء الدردشات المؤرشفة، للوصول إليها انقر 5 مرات أو اضغط مع الاستمرار على عنوان \"WhatsApp\" في رأس الشاشة الرئيسية</string>
+    <string name="hide_archived_chat_sum">إخفاء الدردشات المؤرشفة، للوصول إليها انقر 5 مرات أو اضغط مع الاستمرار على عنوان \"TikTok\" في رأس الشاشة الرئيسية</string>
     <string name="hide_once_view_seen">إخفاء العرض بمجرد رؤيته</string>
     <string name="hide_once_view_seen_sum">إخفاء هذا العرض تمت رؤية إحدى الوسائط</string>
     <string name="call_blocker">حظر المكالمات</string>
@@ -119,10 +119,10 @@
     <string name="version_s">الإصدار %s</string>
     <string name="module_disabled">الوحدة معطلة🚫</string>
     <string name="whatsapp_in_background">واتساب في الخلفية</string>
-    <string name="whatsapp_is_not_running_or_has_not_been_activated_in_lsposed">لا يعمل Whatsapp أو لم يتم تفعيله في Lsposed</string>
+    <string name="whatsapp_is_not_running_or_has_not_been_activated_in_lsposed">لا يعمل TikTok أو لم يتم تفعيله في Lsposed</string>
     <string name="business_is_not_running_or_has_not_been_activated_in_lsposed">واتساب أعمال لا يعمل أو لم يتم تفعيل أداة Lsposed </string>
-    <string name="restart_wpp">من الضروري إعادة تشغيل WhatsApp لتفعيل التغييرات في Wa Encer. هل تريد إعادة التشغيل؟</string>
-    <string name="version_s_not_listed">الإصدار %s غير مدرج في الإصدارات المدعومة!\nالرجاء استخدام إصدار WhatsApp المدعوم!</string>
+    <string name="restart_wpp">من الضروري إعادة تشغيل TikTok لتفعيل التغييرات في Wa Encer. هل تريد إعادة التشغيل؟</string>
+    <string name="version_s_not_listed">الإصدار %s غير مدرج في الإصدارات المدعومة!\nالرجاء استخدام إصدار TikTok المدعوم!</string>
     <string name="media">الوسائط</string>
     <string name="show_button_to_send_blue_tick">إظهار أيقونة لإرسال علامة زرقاء✔️✔️</string>
     <string name="show_button_to_send_blue_tick_sum">إظهار أيقونة لإرسال علامة زرقاء (ضع علامة كمقروء/مشاهدة)</string>
@@ -372,7 +372,7 @@
     <string name="custom_privacy_per_contact">خصوصية مخصصة لكل جهة اتصال</string>
     <string name="custom_privacy_per_contact_sum">قم بتنشيط الخصوصية المخصص على شاشة معلومات الاتصال</string>
     <string name="assemblyai">تمكين(AssemblyAI)</string>
-    <string name="assemblyai_sum">استبدال النسخ الافتراضي لـ WhatsApp بـ AssemblyAI</string>
+    <string name="assemblyai_sum">استبدال النسخ الافتراضي لـ TikTok بـ AssemblyAI</string>
     <string name="assemblyai_key">مفتاح AssemblyAI</string>
     <string name="assemblyai_key_sum">مفتاح الوصول API AssemblyAI (تسجيل الدخول إلى الموقع وإنشاء حساب للحصول على المفتاح الخاص بك)</string>
     <string name="google_translate">تمكين ترجمة جوجل</string>
@@ -395,7 +395,7 @@
     <string name="ask_download_folder">لاستخدام وظائف التنزيل الخاصة بـ WAE Enhancer، يجب عليك تحديد مجلد لحفظ الملفات التي تم تنزيلها.</string>
     <string name="download_folder_permission">إذن تحميل المجلد</string>
     <string name="lite_mode">الوضع الخفيف</string>
-    <string name="lite_mode_sum">يعطل الوضع الخفيف معظم ميزات الثيمات ويتم إيقاف تشغيل جسر الاتصال الذي يحافظ على WhatsApp نشطًا دائمًا.</string>
+    <string name="lite_mode_sum">يعطل الوضع الخفيف معظم ميزات الثيمات ويتم إيقاف تشغيل جسر الاتصال الذي يحافظ على TikTok نشطًا دائمًا.</string>
     <string name="update_check">التحقق من التحديثات تلقائيًا</string>
     <string name="update_check_sum">تمكين أو تعطيل التحقق التلقائي من التحديث. سيؤدي هذا إلى تعطيل النوافذ المنبثقة داخل تطبيق واتساب.</string>
     <string name="change_default_dpi">تغيير DPI الافتراضي</string>

@@ -28,14 +28,10 @@ android {
     flavorDimensions += "version"
 
     productFlavors {
-        create("whatsapp") {
+        create("tiktok") {
             dimension = "version"
-            applicationIdSuffix = ""
-        }
-        create("business") {
-            dimension = "version"
-            applicationIdSuffix = ".w4b"
-            resValue("string", "app_name", "Wa Enhancer Business")
+            applicationIdSuffix = ".tiktok"
+            resValue("string", "app_name", "TikTok Enhancer")
         }
     }
 
@@ -171,37 +167,4 @@ configurations.all {
 
 interface InjectedExecOps {
     @get:Inject val execOps: ExecOperations
-}
-
-
-afterEvaluate {
-    listOf("installWhatsappDebug", "installBusinessDebug").forEach { taskName ->
-        tasks.findByName(taskName)?.doLast {
-            runCatching {
-                val injected  = project.objects.newInstance<InjectedExecOps>()
-                runBlocking {
-                    injected.execOps.exec {
-                        commandLine(
-                            "adb",
-                            "shell",
-                            "am",
-                            "force-stop",
-                            project.properties["debug_package_name"]?.toString()
-                        )
-                    }
-                    delay(500)
-                    injected.execOps.exec {
-                        commandLine(
-                            "adb",
-                            "shell",
-                            "monkey",
-                            "-p",
-                            project.properties["debug_package_name"].toString(),
-                            "1"
-                        )
-                    }
-                }
-            }
-        }
-    }
 }
